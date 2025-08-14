@@ -5,8 +5,9 @@ Um chatbot em Streamlit que interpreta perguntas em linguagem natural sobre indi
 ## Funcionalidades
 
 - Input de pergunta em linguagem natural
-- Geração de query DAX com modelo GPT-3.5-turbo
-- Preparado para integração com API da OpenAI e cubo tabular
+- Geração de query DAX via OpenAI GPT
+- Histórico de interações
+- Preparado para integração com cubo tabular
 
 ## Como correr localmente
 
