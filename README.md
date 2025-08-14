@@ -1,4 +1,3 @@
-
 # BIUPQueryBot
 
 Um chatbot em Streamlit que interpreta perguntas em linguagem natural sobre indicadores de negócio e gera queries DAX para cubos tabulares.
@@ -6,8 +5,8 @@ Um chatbot em Streamlit que interpreta perguntas em linguagem natural sobre indi
 ## Funcionalidades
 
 - Input de pergunta em linguagem natural
-- Simulação de geração de query DAX
-- Preparado para integração com API de GPT e cubo tabular
+- Geração de query DAX com modelo GPT-3.5-turbo
+- Preparado para integração com API da OpenAI e cubo tabular
 
 ## Como correr localmente
 
