@@ -1,13 +1,13 @@
 body {
-  background-color: #ffffff;
+  background-color: #f2f2f2;
   color: #2c3e50;
   font-family: 'Inter', sans-serif;
   padding: 2rem;
 }
 
 button[kind="primary"] {
-  background-color: #1aa6b7; /* tom próximo ao azul-esverdeado do site */
-  color: #ffffff;
+  background-color: #1aa6b7;
+  color: white;
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 8px;
