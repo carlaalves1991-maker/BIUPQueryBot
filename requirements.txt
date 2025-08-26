@@ -1,3 +1,4 @@
-streamlit
+streamlit>=1.30
 openai>=1.0.0
 streamlit-keycloak>=0.3.3
+python-dotenv>=1.0.0
