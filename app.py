@@ -1,13 +1,20 @@
 import os
 import streamlit as st
 import openai
-from streamlit_keycloak import login, logout
+from urllib.parse import quote
+
+# Tentar importar o Keycloak
+try:
+    from streamlit_keycloak import login
+except ModuleNotFoundError:
+    st.error("Falta instalar 'streamlit-keycloak'. Confirma o requirements.txt e faz Restart em Manage app.")
+    st.stop()
 
 # ---- Configuração da página ----
 st.set_page_config(page_title="Chat de BI com GPT", page_icon="📊")
 
 # ---- Configurações do Keycloak ----
-KEYCLOAK_URL = os.getenv("KC_URL", "http://<IP_DA_VM>:8080/")   # Ex.: http://192.168.1.57:8080/
+KEYCLOAK_URL = os.getenv("KC_URL", "http://<IP_DA_VM>:8080/")   # Exemplo: http://192.168.1.57:8080/
 REALM        = os.getenv("KC_REALM", "biup")
 CLIENT_ID    = os.getenv("KC_CLIENT_ID", "bi-chat-app")
 
@@ -17,7 +24,7 @@ token = login(
     realm=REALM,
     client_id=CLIENT_ID,
     auto_refresh=True,
-    verify_tls=False   # só usar False se Keycloak estiver sem HTTPS
+    verify_tls=False   # só usar False se o Keycloak não tiver HTTPS
 )
 
 if not token:
@@ -27,17 +34,20 @@ if not token:
 username = token.get("preferred_username", "utilizador")
 st.sidebar.success(f"Bem-vindo(a), {username} 👋")
 
-# Botão de logout
+# ---- Botão de Logout ----
+LOGOUT_REDIRECT = "https://biupquerybot.streamlit.app/"  # já deve estar em Post-logout redirect URIs
+base = KEYCLOAK_URL.rstrip("/")
+logout_url = (
+    f"{base}/realms/{REALM}/protocol/openid-connect/logout"
+    f"?client_id={CLIENT_ID}"
+    f"&post_logout_redirect_uri={quote(LOGOUT_REDIRECT, safe='')}"
+)
+
 if st.sidebar.button("Terminar sessão"):
-    logout(
-        server_url=KEYCLOAK_URL,
-        realm=REALM,
-        client_id=CLIENT_ID,
-        redirect_uri="https://biupquerybot.streamlit.app/"
-    )
+    st.markdown(f'<meta http-equiv="refresh" content="0; url={logout_url}">', unsafe_allow_html=True)
     st.stop()
 
-# ---- App principal (só aparece após login) ----
+# ---- App principal (Chatbot BI/DAX) ----
 st.title("🤖 Chatbot de Indicadores de Negócio")
 st.markdown("Faça perguntas sobre os seus dados de BI e receba queries DAX automaticamente.")
 
