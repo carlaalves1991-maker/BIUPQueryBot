@@ -1,22 +1,9 @@
+
 body {
-  background-color: #f2f2f2;
-  color: #2c3e50;
-  font-family: 'Inter', sans-serif;
-  padding: 2rem;
+    background-color: #0f0f0f;
+    color: #ffffff;
 }
-
 button[kind="primary"] {
-  background-color: #1aa6b7;
-  color: white;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button[kind="primary"]:hover {
-  background-color: #178a98;
+    background-color: #1f7aec;
+    color: white;
 }
